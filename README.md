@@ -1,5 +1,7 @@
 # Habanero
 
+<!-- MDOC !-->
+
 Habanero allows you to hot-deploy your Phoenix app to a running instance.
 
 **Warning:** do not use this in production, it is intended for development only.
