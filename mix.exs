@@ -28,6 +28,7 @@ defmodule Habanero.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:phoenix, "~> 1.7"},
       {:req, "~> 0.4.8"},
       {:ex_doc, "~> 0.31", only: :dev, runtime: false}
     ]
