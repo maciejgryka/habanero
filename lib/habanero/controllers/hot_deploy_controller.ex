@@ -6,7 +6,7 @@ defmodule Habanero.HotDeployController do
   def update(conn, %{"updates" => updates} = _params) do
     [secret] = Plug.Conn.get_req_header(conn, "x-habanero-secret")
 
-    if secret == Application.get_env(:wtrdemo, :habanero_secret) do
+    if secret == Application.get_env(:habanero, :secret) do
       Enum.map(updates, fn %{"body" => body, "path" => path} ->
         filename = Path.basename(path)
         compile(filename, body)
