@@ -42,7 +42,9 @@ defmodule Habenero.Watcher do
   defp post_update(url, path, body) do
     [method: :post, url: url, json: %{updates: [%{path: path, body: body}]}]
     |> Req.new()
-    |> Req.Request.put_header("x-habanero-secret", Application.get_env(:habanero, :secret))
+    |> Req.Request.put_header("x-habanero-secret", secret())
     |> Req.Request.run_request()
   end
+
+  defp secret, do: System.get_env("HABANERO_SECRET")
 end
