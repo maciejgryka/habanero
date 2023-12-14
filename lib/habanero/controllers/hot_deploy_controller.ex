@@ -26,7 +26,9 @@ defmodule Habanero.HotDeployController do
     if String.ends_with?(filename, ".ex") do
       {:ok, tmp_path} = Briefly.create()
       :ok = File.write!(tmp_path, body)
+      Code.put_compiler_option(:ignore_module_conflict, true)
       Code.compile_file(tmp_path)
+      Code.put_compiler_option(:ignore_module_conflict, false)
     end
   end
 end
