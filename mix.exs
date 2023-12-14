@@ -31,6 +31,7 @@ defmodule Habanero.MixProject do
       {:phoenix, "~> 1.7"},
       {:req, "~> 0.4.8"},
       {:briefly, "~> 0.5.0"},
+      {:file_system, "~> 1.0", only: :dev},
       {:ex_doc, "~> 0.31", only: :dev, runtime: false}
     ]
   end
