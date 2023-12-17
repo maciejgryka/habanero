@@ -1,7 +1,7 @@
 # Getting started
 
 - Install [`habanero`](https://hex.pm/package/habanero)
-- Coonfiguration: set `HABANERO_SECRET` to the same random value (e.g. `mix phx.gen.secret`) locally and in your deployment. Then in `config/dev.exs`:
+- Configuration: set `HABANERO_SECRET` to the same random value (e.g. `mix phx.gen.secret`) locally and in your deployment. Then in `config/dev.exs`:
 
       config :habanero,
         deploy_url: $DEPLOY_URL,
@@ -19,6 +19,17 @@
           post "/habanero_deploy", Habanero.HotDeployController, :update
         end
 
-- Deploy your app
-- Set up the local watcher.
-- Make a change locally, see the hit deploy in action
+- Deploy your app, so that the new endpoint is available.
+- Set up the local watcher. We'll configure it to only start in development:
+
+      children =
+        if System.get_env("MIX_ENV", "dev") == "dev" do
+          children ++
+            [
+              {Habenero.Watcher, [dirs: ["lib/<your_app>/", "lib/<your_app>_web/"], latency: 0]}
+            ]
+        else
+          children
+        end
+
+- Now, start your dev server locally, make a change, and see the hot deploy in action 🔥
