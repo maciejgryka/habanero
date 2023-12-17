@@ -14,7 +14,10 @@
 
 - Add the 🌶️ hot deploy 🌶️ route to your app
 
-      post "/habanero_deploy", Habanero.HotDeployController, :update
+        scope "/" do
+          pipe_through :api
+          post "/habanero_deploy", Habanero.HotDeployController, :update
+        end
 
 - Deploy your app
 - Set up the local watcher.
